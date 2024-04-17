@@ -210,6 +210,75 @@ using namespace std;
 
 
 // 4 --------------------------------------------------------------
+// Класс, реализующий logger с возможностью одновременной записи из нескольких потоков
+///*Implementing a concurrent logging system in C++ that allows multiple threads 
+//to write to the same output file without corrupting the data involves managing
+//access to the file resource with proper synchronization. 
+//A common approach is to use mutexes to ensure that 
+//only one thread can write to the file at any given time.
+//*/
+//#include <iostream>
+//#include <fstream>
+//#include <mutex>
+//#include <thread>
+//#include <vector>
+//#include <string>
+//
+//class ConcurrentLogger {
+//private:
+//    std::ofstream log_file;
+//    std::mutex write_mutex;
+//
+//public:
+//    // Constructor that opens the log file
+//    ConcurrentLogger(const std::string& filename) {
+//        log_file.open(filename, std::ios::app); // Open in append mode
+//        if (!log_file.is_open()) {
+//            throw std::runtime_error("Failed to open log file");
+//        }
+//    }
+//
+//    // Destructor to close the log file
+//    ~ConcurrentLogger() {
+//        if (log_file.is_open()) {
+//            log_file.close();
+//        }
+//    }
+//
+//    // Log a message to the file
+//    void log(const std::string& message) {
+//        std::lock_guard<std::mutex> lock(write_mutex);
+//        log_file << message << std::endl;
+//        if (!log_file) {
+//            throw std::runtime_error("Failed to write to log file");
+//        }
+//    }
+//};
+//
+//void threadFunction(ConcurrentLogger& logger, int thread_id) {
+//    // Each thread logs a message 10 times
+//    for (int i = 0; i < 10; ++i) {
+//        logger.log("Thread " + std::to_string(thread_id) + " logging message " + std::to_string(i));
+//    }
+//}
+//
+//int main() {
+//    const int num_threads = 5;
+//    std::vector<std::thread> threads;
+//    ConcurrentLogger logger("log.txt");
+//
+//    // Create and start threads
+//    for (int i = 0; i < num_threads; ++i) {
+//        threads.emplace_back(threadFunction, std::ref(logger), i);
+//    }
+//
+//    // Wait for all threads to finish
+//    for (auto& t : threads) {
+//        t.join();
+//    }
+//
+//    return 0;
+//}
 
 
 // 5 --------------------------------------------------------------
